@@ -59,6 +59,19 @@ code {
   max-height: 34px;
 }
 
-.test .mybtn {
+.test .mybtn,
+.gamebtndiv button {
   font-size: 1px;
+}
+
+.reset-div,
+.gamebtndiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.gamebtndiv {
+  justify-content: space-evenly;
+  margin-bottom: 10px;
 }
