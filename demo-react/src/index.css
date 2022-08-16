@@ -75,3 +75,44 @@ code {
   justify-content: space-evenly;
   margin-bottom: 10px;
 }
+
+#root>div {
+  position: relative;
+}
+
+.history-list {
+  position: absolute;
+  top: 0%;
+  right: 30px;
+  height: 50%;
+  overflow: scroll;
+}
+
+.history-list p {
+  font-size: 1px;
+  text-align: center;
+}
+
+.history-list ul {
+  border: 0.5px solid black;
+  margin-top: 5px;
+  padding: 0;
+}
+
+.history-list li {
+  list-style: none;
+  text-align: center;
+  /* display: flex;
+  justify-content: center; */
+  position: relative;
+}
+
+.history-list li button {
+  width: 20px;
+  text-align: center;
+  font-size: 5px;
+  border-width: unset;
+  font-family: auto;
+  box-sizing: border-box;
+  transform: translateY(-6px);
+}

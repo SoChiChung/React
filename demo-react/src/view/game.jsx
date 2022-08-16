@@ -2,7 +2,7 @@
  * @Author: SoChichung
  * @Date: 2022-08-08 10:46:38
  * @LastEditors: SoChichung
- * @LastEditTime: 2022-08-13 00:24:03
+ * @LastEditTime: 2022-08-16 19:11:55
  * @Description:
  *
  * Copyright (c) 2022 by SoChichung ddeadwings@gmail.com, All Rights Reserved.
@@ -39,9 +39,10 @@ export default class Game extends React.Component {
     this.state = {
       history: [{ squares: Array(9).fill(null) }],
       xisNext: true,
+      stepnumber: 0,
     };
     this.handleClick = (i) => {
-      let history = this.state.history;
+      let history = this.state.history.slice(0, this.state.stepnumber + 1);
       let current = history[history.length - 1];
       const squares = current.squares.slice();
       if (squares[i] || calculateWinner(squares)) return;
@@ -54,6 +55,7 @@ export default class Game extends React.Component {
           },
         ]),
         xisNext: !this.state.xisNext,
+        stepnumber: history.length,
       });
     };
     this.resetBoard = () => {
@@ -62,11 +64,17 @@ export default class Game extends React.Component {
         xisNext: true,
       });
     };
+    this.jumpto = (i) => {
+      this.setState({
+        stepnumber: i,
+        xisNext: i % 2 === 0,
+      });
+    };
   }
 
   render() {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepnumber];
     const winner = calculateWinner(current.squares);
     let status;
     console.log(winner);
@@ -85,6 +93,24 @@ export default class Game extends React.Component {
           onClick={(i) => this.handleClick(i)}
           onReset={this.resetBoard}
         ></Board>
+        <div className="history-list">
+          <p>历史记录</p>
+          <ul>
+            {history.map((item, index) => {
+              return (
+                <li>
+                  <button
+                    onClick={() => {
+                      this.jumpto(index);
+                    }}
+                  >
+                    {index}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
         <div className="gamebtndiv">
           <button>上一步</button>
           <button>下一步</button>
